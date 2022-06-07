@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KCX Barre</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Syncopate:400,700">
+  <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+  <div id="main">
+  <div id="container">
+    <div class="barre"></div>
+    <div class="team-record kc"></div>
+    <div class="team-record koi"></div>
+    <img class="logo" src="./img/logo-ekwateur.png">
+  </div>
+
+  <div id="right">
+    <div id="reversed-barre" class="barre"></div>
+    <div id="reversed-kc" class="team-record kc"></div>
+    <div id="reversed-koi" class="team-record koi"></div>
+    <img class="logo" src="./img/logo-ekwateur.png">
+  </div>
+</div>
+</body>
+
+<script type="module">
+  import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
+
+  const socket = io();
+
+  let horizontal = false
+
+  socket.on('current', data => {
+    if (horizontal) {
+      Array.from(document.getElementsByClassName('barre')).forEach(e => {
+        e.style.clip = `rect(0, ${data ? ((data * 1319) / 130) : 0}px, 203px, 0)`
+      })
+      document.getElementById('reversed-barre').style.clip = `rect(0, 1319px, 203px, ${data ? 1319 -((data * 1319) / 130) : 0}px)`
+    } else {
+      Array.from(document.getElementsByClassName('barre')).forEach(e => {
+        e.style.clip = `rect(${data ? (1013 - (data * 1013) / 130) : 0}px, 301px, 1013px, 0)`
+      })
+      
+    }
+  })
+
+  socket.on('toggleRecords', show => {
+    if (show) {
+      Array.from(document.getElementsByClassName('team-record')).forEach(e => {
+        e.style.visibility = `visible`
+      })
+    } else {
+      Array.from(document.getElementsByClassName('team-record')).forEach(e => {
+        e.style.visibility = `hidden`
+      })
+    }
+  })
+
+  socket.on('recordsState', show => {
+    if (show) {
+      Array.from(document.getElementsByClassName('team-record')).forEach(e => {
+        e.style.visibility = `visible`
+      })
+    } else {
+      Array.from(document.getElementsByClassName('team-record')).forEach(e => {
+        e.style.visibility = `hidden`
+      })
+    }
+  })
+
+  socket.on('kc', score => {
+    if (horizontal) {
+      Array.from(document.getElementsByClassName('kc')).forEach(e => {
+        e.style.left = `${250 + ((score * 1319) / 130)}px`
+      })
+      document.getElementById('reversed-kc').style.left = 'auto'
+      document.getElementById('reversed-kc').style.right = `${250 + ((score * 1319) / 130)}px`
+    } else {
+      Array.from(document.getElementsByClassName('kc')).forEach(e => {
+        e.style.bottom = `${-17 + ((score * 1013) / 130)}px`
+      })
+    }
+  })
+
+  socket.on('koi', score => {
+    if (horizontal) {
+      Array.from(document.getElementsByClassName('koi')).forEach(e => {
+        e.style.left = `${250 + ((score * 1319) / 130)}px`
+      })
+      document.getElementById('reversed-koi').style.left = 'auto'
+      document.getElementById('reversed-koi').style.right = `${250 + ((score * 1319) / 130)}px`
+    } else {
+      Array.from(document.getElementsByClassName('koi')).forEach(e => {
+        e.style.bottom = `${-17 + ((score * 1013) / 130)}px`
+      })
+    }
+  })
+
+  const urlSearchParams = new URLSearchParams(window.location.search);
+  if (urlSearchParams.has("horizontal")) {
+    horizontal = true
+    document.getElementById('main').classList.add('horizontal')
+  }
+</script>
+</html>

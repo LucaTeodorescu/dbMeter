@@ -1,0 +1,53 @@
+html, body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  font-family: 'Syncopate';
+  overflow: hidden;
+  font-weight: 700;
+}
+
+#container {
+  width: 384px;
+  height: 2496px;
+  position: relative;
+}
+
+#barre {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  height: 2496px;
+  width: 384px;
+  background: linear-gradient(#FFBC74 0%, white 53%, black 100%);
+  transition: ease-in 0.4s;
+}
+
+.team-record {
+  display: none;
+  overflow: hidden;
+  width: 203px;
+  height: 102px;
+  position: absolute;
+  left: 98px;
+  top: 996px;
+}
+
+#kc {
+  background-image: url('../img/kc.png');
+  top: 150px;
+}
+
+#koi {
+  background-image: url('../img/koi.png');
+  top: 280px;
+}
+
+#logo {
+  width: 384px;
+  height: auto;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+}

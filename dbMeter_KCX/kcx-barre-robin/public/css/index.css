@@ -1,0 +1,121 @@
+html, body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  overflow: hidden;
+  font-family: 'Syncopate';
+  font-weight: 700;
+}
+
+#main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+}
+
+#main.horizontal {
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#container {
+  background-image: url('../img/vertical.png');
+  width: 400px;
+  height: 1080px;
+  position: relative;
+}
+
+.horizontal #container {
+  background-image: url('../img/horizontal.png');
+  background-size: 1920px 384px;
+  background-repeat: no-repeat;
+  width: 1920px;
+  height: 384px;
+}
+
+#right {
+  background-image: url('../img/vertical-right.png');
+  width: 400px;
+  height: 1080px;
+  position: relative;
+}
+
+.horizontal #right {
+  background-image: url('../img/horizontal-right.png');
+  background-size: 1920px 384px;
+  background-repeat: no-repeat;
+  width: 1920px;
+  height: 384px;
+}
+
+.barre {
+  position: absolute;
+  bottom: 34px;
+  left: 98px;
+  height: 1013px;
+  width: 203px;
+  background: linear-gradient(#eec36d 0%, white 53%, black 100%);
+  transition: ease-in 0.4s;
+}
+
+.horizontal .barre {
+  bottom: 78px;
+  left: 301px;
+  height: 203px;
+  width: 1319px;
+  background: linear-gradient(90deg, black 0%, white 53%, #eec36d 100%);
+}
+
+.horizontal #right .barre {
+  bottom: 78px;
+  right: 300px;
+  left: auto;
+  height: 203px;
+  width: 1319px;
+  background: linear-gradient(90deg, #eec36d 0%, white 53%, black 100%);
+}
+
+
+.team-record {
+  overflow: hidden;
+  visibility: hidden;
+  position: absolute;
+  width: 203px;
+  height: 102px;
+  left: 98px;
+}
+
+.horizontal .team-record {
+  width: 102px;
+  height: 203px;
+  left: 301px;
+  top: 103px;
+}
+
+.kc {background-image: url('../img/kc.png');}
+.koi {background-image: url('../img/koi.png');}
+
+.horizontal .kc {background-image: url('../img/kc-h.png');}
+.horizontal .koi {background-image: url('../img/koi-h.png');}
+
+.logo {
+  width: 203px;
+  position: absolute;
+  bottom: 55px;
+  left: 98px;
+}
+
+.horizontal .logo {
+  bottom: 101px;
+  left: 323px;
+  width: 300px;
+}
+
+.horizontal #right .logo {
+  bottom: 101px;
+  right: 323px;
+  left: auto;
+  width: 300px;
+}

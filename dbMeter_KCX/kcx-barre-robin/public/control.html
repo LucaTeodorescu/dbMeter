@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KCX Barre - control</title>
+  <link rel="stylesheet" href="./css/control.css">
+</head>
+<body>
+  <div id="container">
+    <div class="row">
+      <label class="label-for-toggle" for="toggleRecords">Afficher les records des équipes</label>
+      <label class="switch">
+        <input type="checkbox" id="toggleRecords">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="row">
+      <label for="kc-score">Score KC</label>
+      <input type="number" max="130" min="0" step="0.1" id="kc-score">
+      <button class="validate-btn" id="validate-kc">Valider</button>
+    </div>
+
+    <div class="row">
+      <label for="koi-score">Score KOI</label>
+      <input type="number" max="130" min="0" step="0.1" id="koi-score">
+      <button class="validate-btn" id="validate-koi">Valider</button>
+    </div>
+  </div>
+
+  <script type="module">
+    import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
+
+    const socket = io();
+
+    socket.on('recordsState', show => {
+      document.getElementById('toggleRecords').checked = show
+    })
+
+    document.getElementById('toggleRecords').addEventListener('change', e => {
+      socket.emit('toggleRecords', e.target.checked)
+    })
+
+    document.getElementById('validate-kc').addEventListener('click', e => {
+      const score = document.getElementById('kc-score').value
+      if (score) {
+        socket.emit('kc', score)
+      }
+    })
+
+    document.getElementById('validate-koi').addEventListener('click', e => {
+      const score = document.getElementById('koi-score').value
+      if (score) {          
+        socket.emit('koi', score)
+      }
+    })
+  </script>
+</body>
+</html>

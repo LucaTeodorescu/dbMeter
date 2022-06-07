@@ -24,6 +24,7 @@ class RecordDB:
 
     def db_from_rms(self,rms_data, dbgain = 1):
         decibel = 20*math.log10(rms_data*dbgain)
+        decibel *= 2
         return decibel
 
     def record(self):
@@ -42,7 +43,7 @@ class RecordDB:
                 self.currentdb = self.db_from_rms(self.currentrms, self.dbgain)
                 decibel_list.append(self.currentdb)
             decibelaveraged = np.median(decibel_list)
-            with open("db.json", "w") as outfile:
+            with open("dbMeter_KCX/kcx-barre-robin/test.json", "w") as outfile:
                  outfile.write(str(round(decibelaveraged, 1)))
 
         print("recording ended.")

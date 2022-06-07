@@ -16,7 +16,7 @@ class DBMeter:
         ]
 
     def readdb_onfile(self):
-        with open("C:/Users/Luca/Documents/GitHub/dbMeter/db.json") as file:
+        with open("C:/Users/Luca/Documents/GitHub/dbMeter/dbMeter_KCX/kcx-barre-robin/test.json") as file:
             self.storedvalue = file.read()
 
     def run(self):
@@ -31,6 +31,7 @@ class DBMeter:
             self.window["storedvalue"](value = self.storedvalue)
             if event == sg.WIN_CLOSED:
                 self.window.close()
+                self.window["status"](value = "Not recording")
                 break
             elif event == "senddbgain":
                 self.recorder.dbgain = float(valuesread["-DBGAIN-"])

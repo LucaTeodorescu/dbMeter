@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KCX Barre</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Syncopate:400,700">
+  <link rel="stylesheet" href="./css/screen.css">
+</head>
+<body>
+  <div id="container">
+    <div id="barre"></div>
+    <div id="koi" class="team-record"></div>
+    <div id="kc" class="team-record"></div>
+    <img id="logo" src="./img/logo-ekWateur.png">
+  </div>
+</body>
+
+<script type="module">
+  import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
+
+  const socket = io();
+
+  socket.on('current', data => {
+    document.getElementById('barre').style.clip = `rect(${data ? (2496 - (data * 2496) / 130) : 0}px, 384px, 2496px, 0)`
+  })
+</script>
+</html>
