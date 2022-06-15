@@ -3,7 +3,8 @@ from threading import Thread
 from dbMeter_KCX.dbMeter import RecordDB
 
 class DBMeter:
-
+    #class run avec pysimplegui pour monitor le rec et modifier le db offset vu dans dbMeter.py
+    
     def __init__(self):
         self.recorder = RecordDB()
         sg.theme("DarkAmber")
@@ -12,11 +13,11 @@ class DBMeter:
         self.layout = [
             [sg.Text("Status : "), sg.Text("Not recording", key = "status"), sg.Button("Change Status", key = "changestatus")],
             [sg.Text("Currently stored value : "), sg.Text(self.storedvalue, key = "storedvalue")],
-            [sg.Text("Modifie dbgain inside recorder : "), sg.InputText(key = "-DBGAIN-"), sg.Button("Send", key="senddbgain")]
+            [sg.Text("Modify dbgain inside recorder : "), sg.InputText(key = "-DBGAIN-"), sg.Button("Send", key="senddbgain")]
         ]
 
     def readdb_onfile(self):
-        with open("C:/Users/Luca/Documents/GitHub/dbMeter/dbMeter_KCX/kcx-barre-robin/test.json") as file:
+        with open("C:/Users/lvteo/Documents/GitHub/dbMeter/dbMeter_KCX/kcx-barre-robin/test.json") as file:
             self.storedvalue = file.read()
 
     def run(self):

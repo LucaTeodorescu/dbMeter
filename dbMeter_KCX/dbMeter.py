@@ -7,6 +7,8 @@ import numpy as np
 print(int(1000*time.time()))
 
 class RecordDB:
+    #class recorder utilisant pyaudio pour ecouter et calculer le db en direct via le micro par defaut
+    #db calculé par sa valeur rms, n'ayant pas d'étalonnage cette valeur a un offset fixable avec dbgain dans db_from_rms()
 
     def __init__(self):
         self.FORMAT = pyaudio.paInt16
@@ -22,9 +24,10 @@ class RecordDB:
         
         self.audio = pyaudio.PyAudio()
 
-    def db_from_rms(self,rms_data, dbgain = 1):
+    def db_from_rms(self,rms_data, dbgain = 20):
+        if rms_data == 0:
+            return 0
         decibel = 20*math.log10(rms_data*dbgain)
-        decibel *= 2
         return decibel
 
     def record(self):

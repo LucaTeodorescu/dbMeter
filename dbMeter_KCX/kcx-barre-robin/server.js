@@ -56,6 +56,6 @@ io.on('connection', client => {
   })
 })
 
-httpServer.listen(2022, () => {
-  console.log('Server running on port 2022')
+httpServer.listen(80, () => {
+  console.log('Server running on port 80')
 })
