@@ -18,7 +18,7 @@ pip install pipwin
 pipwin install pyaudio
 ```
 
-in kcx-barre-robin
+in js_workers
 ```
 npm i
 node server.js
